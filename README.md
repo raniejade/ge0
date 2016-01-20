@@ -1,2 +1,1 @@
-# ge0
-Codename: GE0
+# ge0 - Game Engine: Zero
