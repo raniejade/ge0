@@ -50,6 +50,18 @@ project(":core") {
     }
 }
 
+project(":ecs") {
+    apply plugin: "java"
+}
+
+project(":ecs-runtime") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":ecs")
+    }
+}
+
 tasks.eclipse.doLast {
     delete ".project"
 }
