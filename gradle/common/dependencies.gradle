@@ -1,0 +1,13 @@
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    dependencies {
+        dependencySet(group: "com.badlogicgames.gdx", version: "1.8.0") {
+            entry "gdx"
+            entry "gdx-box2d"
+            entry "gdx-backend-lwjgl"
+            entry "gdx-platform"
+            entry "gdx-box2d-platform"
+        }
+    }
+}

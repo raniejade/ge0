@@ -4,7 +4,7 @@ sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 project.ext.mainClassName = "io.polymorphicpanda.ge0.desktop.DesktopLauncher"
-project.ext.assetsDir = new File("../core/assets");
+project.ext.assetsDir = new File("../ge0editor-core/assets");
 
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
