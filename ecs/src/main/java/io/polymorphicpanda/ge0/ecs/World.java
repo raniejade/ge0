@@ -5,6 +5,9 @@ import javax.annotation.Nonnull;
 
 import java.util.List;
 
+import io.polymorphicpanda.ge0.ecs.archetype.ArcheType;
+import io.polymorphicpanda.ge0.ecs.component.Component;
+import io.polymorphicpanda.ge0.ecs.component.ComponentMapper;
 import io.polymorphicpanda.ge0.ecs.entity.Aspect;
 import io.polymorphicpanda.ge0.ecs.system.AbstractEntitySystem;
 
@@ -17,9 +20,30 @@ public abstract class World {
         return null;
     }
 
-    public abstract @Nonnull List<Integer> entities(@Nonnull Aspect.Builder builder);
     public abstract void update(@Nonnegative float delta);
-    public abstract void enableSystem(@Nonnull AbstractEntitySystem system);
-    public abstract void disableSystem(@Nonnull AbstractEntitySystem system);
     public abstract void dispose();
+    public abstract Manager getManager();
+
+
+    public interface Manager {
+
+        int create();
+        void delete(int entityId);
+
+        @Nonnull
+        List<Integer> entities(@Nonnull Aspect.Builder builder);
+
+        void enableSystem(@Nonnull AbstractEntitySystem system);
+
+        void disableSystem(@Nonnull AbstractEntitySystem system);
+
+        @Nonnull
+        <T extends Component> ComponentMapper<T> mapper(@Nonnull Class<T> component);
+
+        @Nonnull
+        ArcheType.Builder archeType();
+
+        @Nonnull
+        ArcheType.Builder archeType(@Nonnull ArcheType base);
+    }
 }

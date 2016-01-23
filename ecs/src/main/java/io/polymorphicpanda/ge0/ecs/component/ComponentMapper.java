@@ -7,6 +7,6 @@ import javax.annotation.Nonnull;
  */
 public interface ComponentMapper<T extends Component> {
     boolean contains(int entity);
-    @Nonnull T get(int entity);
+    @Nonnull T create(int entity);
     void remove(int entity);
 }

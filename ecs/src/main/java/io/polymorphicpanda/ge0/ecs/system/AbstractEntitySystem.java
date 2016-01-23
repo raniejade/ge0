@@ -1,5 +1,7 @@
 package io.polymorphicpanda.ge0.ecs.system;
 
+import javax.annotation.Nonnegative;
+
 import io.polymorphicpanda.ge0.ecs.World;
 import io.polymorphicpanda.ge0.ecs.entity.Aspect;
 
@@ -16,14 +18,14 @@ public abstract class AbstractEntitySystem {
 
     protected void setEnabled(boolean enabled) {
         if (enabled) {
-            getWorld().enableSystem(this);
+            getWorldManager().enableSystem(this);
         } else {
-            getWorld().disableSystem(this);
+            getWorldManager().disableSystem(this);
         }
     }
 
     public void process(float delta) {
-        for (int entity: getWorld().entities(aspect)) {
+        for (int entity: getWorldManager().entities(aspect)) {
             process(delta, entity);
         }
     }
@@ -32,7 +34,7 @@ public abstract class AbstractEntitySystem {
         // do nothing
     }
 
-    protected abstract void process(float delta, int entity);
+    protected abstract void process(@Nonnegative float delta, int entity);
 
     public void dispose() {
         // do nothing
@@ -43,7 +45,8 @@ public abstract class AbstractEntitySystem {
         this.world = world;
     }
 
-    protected final World getWorld() {
-        return world;
+
+    protected final World.Manager getWorldManager() {
+        return world.getManager();
     }
 }
