@@ -9,5 +9,7 @@ dependencyManagement {
             entry "gdx-platform"
             entry "gdx-box2d-platform"
         }
+
+        dependency "com.google.code.findbugs:jsr305:3.0.1"
     }
 }

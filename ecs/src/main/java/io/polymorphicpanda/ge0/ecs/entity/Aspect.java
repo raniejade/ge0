@@ -15,28 +15,8 @@ public final class Aspect {
     private Aspect() {
     }
 
-    public static Builder all(List<Class<? extends Component>> components) {
-        return new Builder().all(components);
-    }
-
-    public static Builder all(Class<? extends Component>... components) {
-        return new Builder().all(Arrays.asList(components));
-    }
-
-    public static Builder exclude(List<Class<? extends Component>> components) {
-        return new Builder().exclude(components);
-    }
-
-    public static Builder exclude(Class<? extends Component>... components) {
-        return new Builder().exclude(Arrays.asList(components));
-    }
-
-    public static Builder any(List<Class<? extends Component>> components) {
-        return new Builder().any(components);
-    }
-
-    public static Builder any(Class<? extends Component>... components) {
-        return new Builder().any(Arrays.asList(components));
+    public static Builder aspect() {
+        return new Builder();
     }
 
     public static final class Builder {
