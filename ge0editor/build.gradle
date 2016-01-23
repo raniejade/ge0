@@ -1,7 +1,13 @@
-apply plugin: "java"
+apply from: "$rootDir/gradle/common/dependencies.gradle"
+apply from: "$rootDir/gradle/common/java.gradle"
 
-sourceCompatibility = 1.6
-sourceSets.main.java.srcDirs = [ "src/" ]
+
+dependencies {
+    compile project(":ge0editor-core")
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl"
+    compile group: "com.badlogicgames.gdx", name: "gdx-platform", classifier: "natives-desktop"
+    compile group: "com.badlogicgames.gdx", name: "gdx-box2d-platform", classifier: "natives-desktop"
+}
 
 project.ext.mainClassName = "io.polymorphicpanda.ge0.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../ge0editor-core/assets");
@@ -29,7 +35,6 @@ dist.dependsOn classes
 
 eclipse {
     project {
-        name = appName + "-desktop"
         linkedResource name: 'assets', type: '2', location: 'PARENT-1-PROJECT_LOC/core/assets'
     }
 }

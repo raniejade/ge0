@@ -1,55 +1,6 @@
 allprojects {
-    apply plugin: "eclipse"
-    apply plugin: "idea"
-
-    apply from: "$rootDir/gradle/common/dependencies.gradle"
-
     version = '1.0'
     ext {
         appName = "ge0"
     }
-
-    repositories {
-        mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-    }
-}
-
-project(":ge0editor") {
-    apply plugin: "java"
-
-
-    dependencies {
-        compile project(":ge0editor-core")
-        compile "com.badlogicgames.gdx:gdx-backend-lwjgl"
-        compile group: "com.badlogicgames.gdx", name: "gdx-platform", classifier: "natives-desktop"
-        compile group: "com.badlogicgames.gdx", name: "gdx-box2d-platform", classifier: "natives-desktop"
-    }
-}
-
-project(":ge0editor-core") {
-    apply plugin: "java"
-
-
-    dependencies {
-        compile "com.badlogicgames.gdx:gdx:"
-        compile "com.badlogicgames.gdx:gdx-box2d"
-    }
-}
-
-project(":ecs") {
-    apply plugin: "java"
-}
-
-project(":ecs-runtime") {
-    apply plugin: "java"
-
-    dependencies {
-        compile project(":ecs")
-    }
-}
-
-tasks.eclipse.doLast {
-    delete ".project"
 }
