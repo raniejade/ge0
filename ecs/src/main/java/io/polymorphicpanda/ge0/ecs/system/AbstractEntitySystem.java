@@ -1,7 +1,5 @@
 package io.polymorphicpanda.ge0.ecs.system;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import io.polymorphicpanda.ge0.ecs.World;
 import io.polymorphicpanda.ge0.ecs.entity.Aspect;
 
@@ -9,7 +7,6 @@ import io.polymorphicpanda.ge0.ecs.entity.Aspect;
  * @author Ranie Jade Ramiso
  */
 public abstract class AbstractEntitySystem {
-    private final AtomicBoolean active = new AtomicBoolean(true);
     private final Aspect.Builder aspect;
     private World world;
 
@@ -17,15 +14,15 @@ public abstract class AbstractEntitySystem {
         this.aspect = aspect;
     }
 
-    public final void setActive(boolean active) {
-        this.active.set(active);
+    protected void setEnabled(boolean enabled) {
+        if (enabled) {
+            getWorld().enableSystem(this);
+        } else {
+            getWorld().disableSystem(this);
+        }
     }
 
-    public final boolean isActive() {
-        return active.get();
-    }
-
-    public final void process(float delta) {
+    public void process(float delta) {
         for (int entity: getWorld().entities(aspect)) {
             process(delta, entity);
         }
@@ -46,7 +43,7 @@ public abstract class AbstractEntitySystem {
         this.world = world;
     }
 
-    public final World getWorld() {
+    protected final World getWorld() {
         return world;
     }
 }
