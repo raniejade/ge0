@@ -4,6 +4,7 @@ import javax.annotation.Nonnegative;
 
 import io.polymorphicpanda.ge0.ecs.World;
 import io.polymorphicpanda.ge0.ecs.entity.Aspect;
+import io.polymorphicpanda.ge0.ecs.event.EventBus;
 
 /**
  * @author Ranie Jade Ramiso
@@ -43,6 +44,10 @@ public abstract class AbstractEntitySystem {
     @Deprecated
     public final void impl_setWorld(World world) {
         this.world = world;
+    }
+
+    protected final EventBus getEventBus() {
+        return getWorldManager().eventBus(this);
     }
 
 

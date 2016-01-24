@@ -9,6 +9,7 @@ import io.polymorphicpanda.ge0.ecs.archetype.ArcheType;
 import io.polymorphicpanda.ge0.ecs.component.Component;
 import io.polymorphicpanda.ge0.ecs.component.ComponentMapper;
 import io.polymorphicpanda.ge0.ecs.entity.Aspect;
+import io.polymorphicpanda.ge0.ecs.event.EventBus;
 import io.polymorphicpanda.ge0.ecs.system.AbstractEntitySystem;
 
 /**
@@ -45,5 +46,9 @@ public abstract class World {
 
         @Nonnull
         ArcheType.Builder archeType(@Nonnull ArcheType base);
+
+
+        @Nonnull
+        EventBus eventBus(@Nonnull AbstractEntitySystem entitySystem);
     }
 }
