@@ -26,16 +26,26 @@ public abstract class AbstractEntitySystem {
     }
 
     public void process(float delta) {
+        begin();
         for (int entity: getWorldManager().entities(aspect)) {
             process(delta, entity);
         }
+        end();
     }
 
     public void initialize() {
         // do nothing
     }
 
+    protected void begin() {
+        // do nothing
+    }
+
     protected abstract void process(@Nonnegative float delta, int entity);
+
+    protected void end() {
+        // do nothing
+    }
 
     public void dispose() {
         // do nothing
