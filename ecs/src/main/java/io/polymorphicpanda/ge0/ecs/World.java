@@ -10,7 +10,7 @@ import io.polymorphicpanda.ge0.ecs.component.Component;
 import io.polymorphicpanda.ge0.ecs.component.ComponentMapper;
 import io.polymorphicpanda.ge0.ecs.entity.Aspect;
 import io.polymorphicpanda.ge0.ecs.event.EventBus;
-import io.polymorphicpanda.ge0.ecs.system.AbstractEntitySystem;
+import io.polymorphicpanda.ge0.ecs.system.AbstractSystem;
 
 /**
  * @author Ranie Jade Ramiso
@@ -34,9 +34,9 @@ public abstract class World {
         @Nonnull
         List<Integer> entities(@Nonnull Aspect.Builder builder);
 
-        void enableSystem(@Nonnull AbstractEntitySystem system);
+        void enableSystem(@Nonnull AbstractSystem system);
 
-        void disableSystem(@Nonnull AbstractEntitySystem system);
+        void disableSystem(@Nonnull AbstractSystem system);
 
         @Nonnull
         <T extends Component> ComponentMapper<T> mapper(@Nonnull Class<T> component);
@@ -49,6 +49,6 @@ public abstract class World {
 
 
         @Nonnull
-        EventBus eventBus(@Nonnull AbstractEntitySystem entitySystem);
+        EventBus eventBus(@Nonnull AbstractSystem entitySystem);
     }
 }

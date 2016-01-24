@@ -9,11 +9,11 @@ import io.polymorphicpanda.ge0.ecs.event.EventBus;
 /**
  * @author Ranie Jade Ramiso
  */
-public abstract class AbstractEntitySystem {
+public abstract class AbstractSystem {
     private final Aspect.Builder aspect;
     private World world;
 
-    protected AbstractEntitySystem(Aspect.Builder aspect) {
+    protected AbstractSystem(Aspect.Builder aspect) {
         this.aspect = aspect;
     }
 
@@ -25,31 +25,33 @@ public abstract class AbstractEntitySystem {
         }
     }
 
-    public void process(float delta) {
-        begin();
-        for (int entity: getWorldManager().entities(aspect)) {
-            process(delta, entity);
-        }
-        end();
-    }
-
     public void initialize() {
         // do nothing
     }
 
-    protected void begin() {
+    public void begin() {
         // do nothing
     }
 
-    protected abstract void process(@Nonnegative float delta, int entity);
+    public final void process(float delta) {
+        processEntities(delta);
+    }
 
-    protected void end() {
+    public void end() {
         // do nothing
     }
 
     public void dispose() {
         // do nothing
     }
+
+    protected final void processEntities(float delta) {
+        getWorldManager().entities(aspect)
+            .stream()
+            .forEach(entity -> processEntity(delta, entity));
+    }
+
+    protected abstract void processEntity(@Nonnegative float delta, int entity);
 
     @Deprecated
     public final void impl_setWorld(World world) {
