@@ -7,6 +7,7 @@ import java.util.List;
 import io.polymorphicpanda.ge0.ecs.archetype.ArcheType;
 import io.polymorphicpanda.ge0.ecs.component.Component;
 import io.polymorphicpanda.ge0.zero.component.ComponentManager;
+import io.polymorphicpanda.ge0.zero.util.CompositionBits;
 import io.polymorphicpanda.ge0.zero.entity.EntityManager;
 
 /**
@@ -34,10 +35,10 @@ public class ArcheTypeBuilder implements ArcheType.Builder {
 
     @Override
     public ArcheType build() {
-        final BitSet composition = componentManager.compose(components);
+        BitSet composition = componentManager.compose(components);
 
         if (base != null) {
-            composition.or(base.getComposition());
+            composition = CompositionBits.compose(builder -> builder.or(base.getComposition()));
         }
 
         return new ArcheTypeImpl(entityManager, composition);

@@ -20,7 +20,7 @@ class ArcheTypeImpl extends ArcheType {
 
     @Override
     public int create() {
-        return 0;
+        return entityManager.create(composition);
     }
 
     public BitSet getComposition() {
