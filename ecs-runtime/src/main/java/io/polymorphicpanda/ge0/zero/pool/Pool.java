@@ -5,17 +5,17 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.polymorphicpanda.ge0.ecs.pool.PooledObject;
+import io.polymorphicpanda.ge0.ecs.pool.Poolable;
 
 /**
  * @author Ranie Jade Ramiso
  */
-public abstract class ObjectPool<T extends PooledObject> {
+public abstract class Pool<T extends Poolable> {
 
     private final Set<T> liveObjects = new HashSet<>();
     private final Deque<T> limbo = new ArrayDeque<>();
 
-    public T request() {
+    public T request() throws InstantiationException {
         T object;
 
         if (!limbo.isEmpty()) {
@@ -40,5 +40,5 @@ public abstract class ObjectPool<T extends PooledObject> {
         limbo.push(object);
     }
 
-    protected abstract T create();
+    protected abstract T create() throws InstantiationException;
 }

@@ -2,6 +2,8 @@ package io.polymorphicpanda.ge0.zero.entity;
 
 import java.util.BitSet;
 
+import io.polymorphicpanda.ge0.ecs.component.Component;
+import io.polymorphicpanda.ge0.ecs.component.ComponentMapper;
 import io.polymorphicpanda.ge0.zero.util.identity.IdentityFactories;
 import io.polymorphicpanda.ge0.zero.util.identity.RecyclingIdentityFactory;
 
@@ -30,6 +32,10 @@ public class EntityManager {
         }
 
         return entityId;
+    }
+
+    public <T extends Component> ComponentMapper<T> mapperFor(Class<T> component) {
+        return null;
     }
 
     public void delete(int entityId) {
