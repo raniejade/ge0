@@ -43,6 +43,13 @@ public class EntityComponentManager {
         addToIndex(entityId, compositionBits);
     }
 
+    /**
+     * Get entities with the given composition.
+     */
+    public Set<Integer> getEntities(BitSet composition) {
+        return compositionIndex.get(composition);
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends Component> T addComponent(int entityId, Class<T> component) {
         assertManaged(entityId);
