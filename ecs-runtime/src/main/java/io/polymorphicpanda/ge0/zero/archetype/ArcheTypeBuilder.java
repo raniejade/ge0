@@ -1,14 +1,14 @@
 package io.polymorphicpanda.ge0.zero.archetype;
 
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import io.polymorphicpanda.ge0.ecs.archetype.ArcheType;
 import io.polymorphicpanda.ge0.ecs.component.Component;
 import io.polymorphicpanda.ge0.zero.component.ComponentManager;
-import io.polymorphicpanda.ge0.zero.util.CompositionBits;
 import io.polymorphicpanda.ge0.zero.entity.EntityManager;
+import io.polymorphicpanda.ge0.zero.util.CompositionBits;
 
 /**
  * @author Ranie Jade Ramiso
@@ -19,7 +19,7 @@ public class ArcheTypeBuilder implements ArcheType.Builder {
     private final EntityManager entityManager;
     private final ComponentManager componentManager;
 
-    private final List<Class<? extends Component>> components = new ArrayList<>();
+    private final Set<Class<? extends Component>> components = new HashSet<>();
 
     public ArcheTypeBuilder(ArcheTypeImpl base, EntityManager entityManager, ComponentManager componentManager) {
         this.base = base;

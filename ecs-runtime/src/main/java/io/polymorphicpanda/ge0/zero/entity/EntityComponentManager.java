@@ -1,7 +1,7 @@
 package io.polymorphicpanda.ge0.zero.entity;
 
-import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,7 +53,7 @@ public class EntityComponentManager {
     @SuppressWarnings("unchecked")
     public <T extends Component> T addComponent(int entityId, Class<T> component) {
         assertManaged(entityId);
-        final BitSet bit = componentManager.compose(Arrays.asList(component));
+        final BitSet bit = componentManager.compose(Collections.singleton(component));
 
         return (T) getInstances(bit).computeIfAbsent(entityId, key -> {
             try {
@@ -84,7 +84,7 @@ public class EntityComponentManager {
     public <T extends Component> void removeComponent(int entityId, Class<T> component) {
         assertManaged(entityId);
 
-        final BitSet bit = componentManager.compose(Arrays.asList(component));
+        final BitSet bit = componentManager.compose(Collections.singleton(component));
 
         final Map<Integer, Component> instances = getInstances(bit);
 

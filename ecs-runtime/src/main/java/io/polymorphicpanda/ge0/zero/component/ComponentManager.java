@@ -4,6 +4,7 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import io.polymorphicpanda.ge0.ecs.component.Component;
@@ -20,7 +21,7 @@ public class ComponentManager {
     private final Map<Class, Integer> componentIdentities = new HashMap<>();
     private final Map<Integer, Pool> componentPool = new HashMap<>();
 
-    public BitSet compose(List<Class<? extends Component>> components) {
+    public BitSet compose(Set<Class<? extends Component>> components) {
         final List<Integer> identities = components.stream()
             .map(this::getIdentity)
             .collect(Collectors.toList());
