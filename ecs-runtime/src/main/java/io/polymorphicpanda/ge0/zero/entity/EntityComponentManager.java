@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import io.polymorphicpanda.ge0.ecs.component.Component;
+import io.polymorphicpanda.ge0.ecs.entity.Aspect;
 import io.polymorphicpanda.ge0.zero.ZeroRuntimeException;
 import io.polymorphicpanda.ge0.zero.component.ComponentManager;
 import io.polymorphicpanda.ge0.zero.pool.InstantiationException;
@@ -46,8 +47,8 @@ public class EntityComponentManager {
     /**
      * Get entities with the given composition.
      */
-    public Set<Integer> getEntities(BitSet composition) {
-        return compositionIndex.get(composition);
+    public Set<Integer> getEntities(Aspect.Builder aspect) {
+        throw new UnsupportedOperationException();
     }
 
     @SuppressWarnings("unchecked")
