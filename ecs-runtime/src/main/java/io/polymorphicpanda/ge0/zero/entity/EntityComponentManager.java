@@ -45,7 +45,7 @@ public class EntityComponentManager {
     }
 
     /**
-     * Get entities with the given composition.
+     * Get entities matching the aspect
      */
     public Set<Integer> getEntities(Aspect.Builder aspect) {
         throw new UnsupportedOperationException();
