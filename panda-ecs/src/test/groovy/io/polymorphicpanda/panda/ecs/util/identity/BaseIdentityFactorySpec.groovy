@@ -7,19 +7,14 @@ import spock.lang.Specification
  */
 abstract class BaseIdentityFactorySpec<T extends IdentityFactory> extends Specification {
 
-    def T identityFactory
-
-    def setup() {
-        identityFactory = getIdentityFactory()
-    }
-
     def "ids generated are unique"(int max) {
         setup:
+            def identityFactory = getIdentityFactory()
             def tracker = new HashSet<Integer>()
 
         when:
             (1..max).each {
-                tracker << it
+                tracker << identityFactory.generate()
             }
 
         then:

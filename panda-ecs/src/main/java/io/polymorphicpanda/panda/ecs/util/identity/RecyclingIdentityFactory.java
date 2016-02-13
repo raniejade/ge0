@@ -16,7 +16,7 @@ public class RecyclingIdentityFactory extends ForwardingIdentityFactory {
     }
 
     @Override
-    public synchronized int generate() {
+    public int generate() {
         if (!limbo.isEmpty()) {
             int id = limbo.poll();
             recycled.set(id, false);
@@ -25,7 +25,7 @@ public class RecyclingIdentityFactory extends ForwardingIdentityFactory {
         return super.generate();
     }
 
-    public synchronized void free(int id) {
+    public void free(int id) {
         limbo.insert(id);
         recycled.set(id);
     }

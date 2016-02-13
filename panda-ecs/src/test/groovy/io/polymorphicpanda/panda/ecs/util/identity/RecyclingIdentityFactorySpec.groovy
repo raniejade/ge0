@@ -8,16 +8,18 @@ class RecyclingIdentityFactorySpec extends BaseIdentityFactorySpec<RecyclingIden
 
     def "should reuse freed up ids"(int max) {
         setup:
+            def identityFactory = getIdentityFactory()
+
             def tracker = new HashSet<Integer>()
 
             // generate the ids
             (1..max).each {
-                tracker << it
+                tracker << identityFactory.generate()
             }
 
             // free everything
             tracker.each {
-                getIdentityFactory().free(it)
+                identityFactory.free(it)
             }
 
 
@@ -27,7 +29,7 @@ class RecyclingIdentityFactorySpec extends BaseIdentityFactorySpec<RecyclingIden
 
         when:
             (1..max).each {
-                tracker << it
+                tracker << identityFactory.generate()
             }
 
         then:
