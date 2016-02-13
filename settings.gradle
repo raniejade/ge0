@@ -1,3 +1,4 @@
 include 'ecs', 'ecs-runtime'
+include 'panda-ecs'
 
 include 'ge0editor', 'ge0editor-core'
