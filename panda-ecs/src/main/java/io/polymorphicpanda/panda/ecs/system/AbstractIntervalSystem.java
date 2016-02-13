@@ -1,6 +1,5 @@
 package io.polymorphicpanda.panda.ecs.system;
 
-import io.polymorphicpanda.panda.ecs.AbstractSystem;
 import io.polymorphicpanda.panda.ecs.entity.Aspect;
 
 /**

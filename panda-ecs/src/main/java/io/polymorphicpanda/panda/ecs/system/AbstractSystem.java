@@ -1,4 +1,4 @@
-package io.polymorphicpanda.panda.ecs;
+package io.polymorphicpanda.panda.ecs.system;
 
 import io.polymorphicpanda.panda.ecs.entity.Aspect;
 import io.polymorphicpanda.panda.ecs.entity.EntitySubscription;
@@ -60,10 +60,22 @@ public abstract class AbstractSystem implements EntitySubscription.Listener {
     protected abstract void process(float delta, int entity);
 
 
-    // bridge between this system and the world
-    static Peer peer;
+    private static Peer peer;
 
-    interface Peer {
+    /**
+     * @treatAsPrivate
+     */
+    @Deprecated
+    public static void impl_setPeer(Peer peer) {
+        AbstractSystem.peer = peer;
+    }
+
+    /**
+     * Bridge between {@link AbstractSystem}s and the {@link io.polymorphicpanda.panda.ecs.World}
+     *
+     * @treatAsPrivate
+     */
+    public interface Peer {
         EntitySubscriptionManager getEntitySubscriptionManager();
     }
 }
