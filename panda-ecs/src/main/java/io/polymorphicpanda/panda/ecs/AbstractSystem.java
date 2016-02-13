@@ -1,7 +1,6 @@
 package io.polymorphicpanda.panda.ecs;
 
 import io.polymorphicpanda.panda.ecs.entity.Aspect;
-import io.polymorphicpanda.panda.ecs.entity.EntitySubscriber;
 import io.polymorphicpanda.panda.ecs.entity.EntitySubscription;
 import io.polymorphicpanda.panda.ecs.entity.EntitySubscriptionManager;
 import io.polymorphicpanda.panda.ecs.util.collection.ImmutableIntBag;
@@ -9,29 +8,41 @@ import io.polymorphicpanda.panda.ecs.util.collection.ImmutableIntBag;
 /**
  * @author Ranie Jade Ramiso
  */
-public abstract class AbstractSystem implements EntitySubscriber {
+public abstract class AbstractSystem implements EntitySubscription.Listener {
     private final EntitySubscription subscription;
+    private boolean enabled;
 
     protected AbstractSystem(Aspect aspect) {
         subscription = peer.getEntitySubscriptionManager().subscription(aspect);
         subscription.subscribe(this);
+        enabled = true;
     }
 
     public void initialize() {
         // do nothing
     }
 
-    public void update(float delta) {
-        subscription.entities()
-            .forEach(entity -> process(delta, entity));
+    public final void process(float delta) {
+        if (isEnabled() && canProcess(delta)) {
+            subscription.entities()
+                .forEach(entity -> process(delta, entity));
+        }
     }
 
     public void destroy() {
         // do nothing
     }
 
-    public boolean canUpdate(float delta) {
+    protected boolean canProcess(float delta) {
         return true;
+    }
+
+    protected boolean isEnabled() {
+        return enabled;
+    }
+
+    protected void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

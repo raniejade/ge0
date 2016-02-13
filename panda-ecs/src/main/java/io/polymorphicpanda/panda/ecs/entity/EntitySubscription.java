@@ -7,6 +7,11 @@ import io.polymorphicpanda.panda.ecs.util.collection.ImmutableIntBag;
  */
 public interface EntitySubscription {
     ImmutableIntBag entities();
-    void subscribe(EntitySubscriber subscriber);
-    void unsubscribe(EntitySubscriber subscriber);
+    void subscribe(Listener subscriber);
+    void unsubscribe(Listener subscriber);
+
+    interface Listener {
+        void inserted(ImmutableIntBag entities);
+        void removed(ImmutableIntBag entities);
+    }
 }

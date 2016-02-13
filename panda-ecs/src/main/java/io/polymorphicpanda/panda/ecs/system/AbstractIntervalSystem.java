@@ -16,7 +16,7 @@ public abstract class AbstractIntervalSystem extends AbstractSystem {
     }
 
     @Override
-    public boolean canUpdate(float delta) {
+    protected boolean canProcess(float delta) {
         accumulator += delta;
 
         if (accumulator >= interval) {
